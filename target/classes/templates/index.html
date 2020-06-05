@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:background="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>宠物救助</title>
+
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/guide1.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.two.css}" />
+
+<link
+	href='https://fonts.googleapis.com/css?family=Vollkorn|Lato:400,700'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/demo.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+<script th:src="@{/js/jquery.min.background.red.js}"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+	<script type="text/javascript"
+			th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+	<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+	<script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+
+
+</head>
+
+<!--<script>-->
+	<!--function exit(){-->
+		<!--$.ajax({-->
+			<!--url:"/login/loginOut",-->
+			<!--type:"POST",-->
+			<!--data:{},-->
+			<!--success:function(data){-->
+				<!--if(data.code == 0)-->
+					<!--window.location.href="/fore/index";-->
+				<!--else{-->
+					<!--layer.msg("未知错误");-->
+				<!--}-->
+			<!--},-->
+			<!--error:function(){-->
+				<!--layer.msg("未知错误");-->
+			<!--}-->
+		<!--});-->
+	<!--}-->
+<!--// </script>-->
+<script th:inline="javascript">
+	$(document).ready(function(){
+		var username = /*[[${flag}]]*/;
+		var messageNum = /*[[${messageNum}]]*/;
+		if(username != "unlogin"){  //已登录状态
+			document.getElementById("div_button").style.display="none";
+			document.getElementById("div_head_image").style.display="inline";
+		}
+		else{
+			document.getElementById("div_head_image").style.display="none";
+			document.getElementById("div_button").style.display="inline";
+		}
+		if(messageNum == 0){
+			document.getElementById("head_message_num").style.display="none";
+			document.getElementById("message_num").style.display="none";
+		}
+	});
+</script>
+
+<body>
+
+
+</div>
+	<div class="the-bigest-container">
+		<header role="banner" class="probootstrap-header">
+			<div class="container">
+				<a href="/fore/index" class="probootstrap-logo">宠物在线救助网站<span></span>
+				</a> <a href="#" class="probootstrap-burger-menu visible-xs"><i></i></a>
+				<div class="mobile-menu-overlay"></div>
+
+				<nav role="navigation" class="probootstrap-nav hidden-xs">
+					<div class="button_su">
+						<span class="su_button_circle"> </span> <a href="/search/searchKeyword"
+							class="button_su_inner"> <span class="button_text_container">
+								项目列表 </span>
+						</a>
+
+						<a href="/launch/toLaunch"
+						   class="button_su_inner"> <span class="button_text_container">
+								发起众筹 </span>
+						</a>
+					</div>
+				</nav>
+
+
+
+
+				<!--<nav role="navigation" class="probootstrap-nav hidden-xs">-->
+					<!--<div class="button_su">-->
+						<!--<span class="su_button_circle"> </span> <a href="/back/adminlogin" target="_blank"-->
+																   <!--class="button_su_inner"> <span class="button_text_container">-->
+								<!--后台管理 </span>-->
+					<!--</a>-->
+					<!--</div>-->
+				<!--</nav>-->
+
+
+
+				<nav role="navigation" class="probootstrap-nav_login hidden-xs">
+					<div class="button_su_login" id="div_button">
+						<span class="su_button_circle"> </span> <a href="#"
+							class="button_su_inner_login"> <span
+							class="button_text_container"
+							onclick="window.location.href='/login/toLogin';"> 登录 </span>
+						</a>
+					</div>
+				</nav>
+				<div class="head-image" id="div_head_image"
+					onclick="window.location.href='/fore/home'">
+					<img th:src="@{/img/head.png}" class="round_icon" alt=""
+						style="cursor: pointer">
+					<div class="news-alert-head" id="head_message_num"
+						th:text="${messageNum}"></div>
+					<div class="head-image-table">
+						<div class="head-image-nickname" th:text="${flag}"
+							style="cursor: pointer"></div>
+						<div class="head-image-button" style="cursor: pointer">个人信息</div>
+						<div class="head-image-button" style="cursor: pointer">账户详情</div>
+						<div class="head-image-button" style="cursor: pointer">我的订单</div>
+						<div class="head-image-button" style="cursor: pointer">我的发起</div>
+						<div class="head-image-button" style="cursor: pointer">
+							消息
+							<div class="news-alert-news" id="message_num"
+								th:text="${messageNum}">
+								</div>
+						</div>
+						<div class="head-image-button" style="cursor: pointer"
+							onclick="exit()">退出</div>
+
+					</div>
+				</div>
+				<div class="search d7">
+					<form action="/search/searchKeyword" method="get">
+						<input type="text" name="keyword" placeholder="搜索从这里开始..." />
+						<button type="submit"></button>
+					</form>
+				</div>
+			</div>
+		</header>
+		<div class="back">
+		</div>
+
+
+
+			<!--脚部-->
+
+		<span class="target"></span>
+
+
+	<!--<script>-->
+            <!--"use strict";-->
+
+            <!--(function () {-->
+
+              <!--var target = document.querySelector(".target");-->
+              <!--var links = document.querySelectorAll(".mynav a");-->
+              <!--var colors = ["darkblue", "darkblue", "darkblue", "darkblue", "darkblue", "darkblue", "darkblue"];-->
+
+              <!--function mouseenterFunc() {-->
+                <!--if (!this.parentNode.classList.contains("active")) {-->
+                  <!--for (var i = 0; i < links.length; i++) {-->
+                    <!--if (links[i].parentNode.classList.contains("active")) {-->
+                      <!--links[i].parentNode.classList.remove("active");-->
+                    <!--}-->
+                    <!--links[i].style.opacity = "0.25";-->
+                  <!--}-->
+
+                  <!--this.parentNode.classList.add("active");-->
+                  <!--this.style.opacity = "1";-->
+
+                  <!--var width = this.getBoundingClientRect().width;-->
+                  <!--var height = this.getBoundingClientRect().height;-->
+                  <!--var left = this.getBoundingClientRect().left + window.pageXOffset;-->
+                  <!--var top = this.getBoundingClientRect().top + window.pageYOffset +10;-->
+                  <!--var color = colors[Math.floor(Math.random() * colors.length)];-->
+
+                  <!--target.style.width = width + "px";-->
+                  <!--target.style.height = height + "px";-->
+                  <!--target.style.left = left + "px";-->
+                  <!--target.style.top = top + "px";-->
+                  <!--target.style.borderColor = color;-->
+                  <!--target.style.transform = "none";-->
+                <!--}-->
+              <!--}-->
+
+              <!--for (var i = 0; i < links.length; i++) {-->
+                <!--links[i].addEventListener("click", function (e) {-->
+                  <!--return e.preventDefault();-->
+                <!--});-->
+                <!--links[i].addEventListener("mouseenter", mouseenterFunc);-->
+              <!--}-->
+
+              <!--function resizeFunc() {-->
+                <!--var active = document.querySelector(".mynav li.active");-->
+
+                <!--if (active) {-->
+                  <!--var left = active.getBoundingClientRect().left + window.pageXOffset;-->
+                  <!--var top = active.getBoundingClientRect().top + window.pageYOffset;-->
+
+                  <!--target.style.left = left + "px";-->
+                  <!--target.style.top = top + "px";-->
+                <!--}-->
+              <!--}-->
+
+              <!--window.addEventListener("resize", resizeFunc);-->
+        <!--})();</script>-->
+
+	<!--<script>-->
+        <!--$( ".button_su_inner" ).mouseenter(function(e) {-->
+           <!--var parentOffset = $(this).offset();-->
+
+           <!--var relX = e.pageX - parentOffset.left;-->
+           <!--var relY = e.pageY - parentOffset.top;-->
+           <!--$(this).prev(".su_button_circle").css({"left": relX, "top": relY });-->
+           <!--$(this).prev(".su_button_circle").removeClass("desplode-circle");-->
+           <!--$(this).prev(".su_button_circle").addClass("explode-circle");-->
+
+        <!--});-->
+
+        <!--$( ".button_su_inner" ).mouseleave(function(e) {-->
+
+             <!--var parentOffset = $(this).offset();-->
+
+             <!--var relX = e.pageX - parentOffset.left;-->
+             <!--var relY = e.pageY - parentOffset.top;-->
+             <!--$(this).prev(".su_button_circle").css({"left": relX, "top": relY });-->
+             <!--$(this).prev(".su_button_circle").removeClass("explode-circle");-->
+             <!--$(this).prev(".su_button_circle").addClass("desplode-circle");-->
+
+        <!--});-->
+
+
+        <!--$( ".button_su_inner_login" ).mouseenter(function(e) {-->
+           <!--var parentOffset = $(this).offset();-->
+
+           <!--var relX = e.pageX - parentOffset.left;-->
+           <!--var relY = e.pageY - parentOffset.top;-->
+           <!--$(this).prev(".su_button_circle").css({"left": relX, "top": relY });-->
+           <!--$(this).prev(".su_button_circle").removeClass("desplode-circle");-->
+           <!--$(this).prev(".su_button_circle").addClass("explode-circle");-->
+
+        <!--});-->
+
+
+        <!--$( ".button_su_inner_login" ).mouseleave(function(e) {-->
+
+        <!--var parentOffset = $(this).offset();-->
+
+        <!--var relX = e.pageX - parentOffset.left;-->
+        <!--var relY = e.pageY - parentOffset.top;-->
+        <!--$(this).prev(".su_button_circle").css({"left": relX, "top": relY });-->
+        <!--$(this).prev(".su_button_circle").removeClass("explode-circle");-->
+        <!--$(this).prev(".su_button_circle").addClass("desplode-circle");-->
+
+        <!--});</script>-->
+	<!--</div>-->
+</body>
+</html>
