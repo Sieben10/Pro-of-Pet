@@ -27,8 +27,8 @@ public class AliDayunSms {
      final String product = "Dysmsapi";//短信API产品名称（短信产品名固定，无需修改）
      final String domain = "dysmsapi.aliyuncs.com";//短信API产品域名（接口地址固定，无需修改）
      //替换成你的AK
-     final String accessKeyId = "LTAI4GJ6LwiqazYVczovCkqz";//你的accessKeyId
-     final String accessKeySecret = "O3RsvDfpDCy13jGIhWmfy5HQ4kWrSY";//你的accessKeySecret
+     final String accessKeyId = //你的accessKeyId
+     final String accessKeySecret = //你的accessKeySecret
      //初始化ascClient,暂时不支持多region（请勿修改）
      IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
      DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
